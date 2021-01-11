@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".VehicalExpenseForm">
+
+    <EditText
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/item"
+        android:hint="Item"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notes"
+        android:hint="notes"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/date"
+        android:hint="Date"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+    <EditText
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ammount"
+        android:hint="ammount"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save"
+        android:text="save"
+        android:layout_gravity="center"></Button>
+
+</LinearLayout>
