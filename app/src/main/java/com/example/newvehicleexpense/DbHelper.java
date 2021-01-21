@@ -16,7 +16,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table userdetailx (item text,note text,date text,ammount number,type text)");
+        db.execSQL("create table userdetailx (id INTEGER PRIMARY KEY AUTOINCREMENT,item text,note text,date text,ammount text,type text)");
 
     }
 
@@ -37,7 +37,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put("ammount",ammount);
         contentValues.put("type",type);
 
-        long result=db.insert("userDetailx",null,contentValues);
+        long result=db.insert("userdetailx",null,contentValues);
         if(result==-1)
         {
             return  false;
@@ -52,38 +52,43 @@ public class DbHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getWritableDatabase();
 
+        Cursor cursor=db.rawQuery("select * from userdetailx group by date",null);
+
+        return  cursor;
+    }
+
+    public Cursor getTotal()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        final Cursor rawQuery = db.rawQuery("SELECT SUM(ammount) AS total FROM userdetailx", null);
+
+        return rawQuery;
+    }
+
+    public Cursor viewDataAll()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+
         Cursor cursor=db.rawQuery("select * from userdetailx",null);
 
         return  cursor;
     }
+
+
+    public void deleteTable()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("delete from userdetailx");
+    }
+
     public Cursor getDatabyDate(String date)
     {
         SQLiteDatabase db=this.getWritableDatabase();
 
-        Cursor cursor=db.rawQuery("select * from userdetailx where date=?",new String[]{date},null);
+        Cursor cursor=db.rawQuery("select * from userdetailx where date=? group by date",new String[]{date},null);
 
         return  cursor;
     }
 
-    public  Boolean deleteUserData(String name)
-    {
-        SQLiteDatabase db=this.getWritableDatabase();
-
-        Cursor cursor=db.rawQuery("select * from userdetailx where item=?",new String[]{name});
-        if(cursor.getCount()>0)
-        {
-            long result=db.delete("userdetailx","item=?",new String[]{name});
-            if(result==-1)
-            {
-                return  false;
-            }
-            else
-            {
-                return true;
-            }
-
-        }
-        else {
-            return false;
-        }}
 }

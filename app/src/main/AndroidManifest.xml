@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewVehicleExpense">
-        <activity android:name=".VehicalExpenseForm"></activity>
+        <activity android:name=".ShowDataActivity"></activity>
+        <activity android:name=".VehicalExpenseForm" />
         <activity android:name=".VehicalExpenseDetails" />
         <activity android:name=".MainActivity">
             <intent-filter>
