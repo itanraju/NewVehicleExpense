@@ -86,7 +86,7 @@ public class DbHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getWritableDatabase();
 
-        Cursor cursor=db.rawQuery("select * from userdetailx where date=? group by date",new String[]{date},null);
+        Cursor cursor=db.rawQuery("select * from userdetailx where date=?",new String[]{date},null);
 
         return  cursor;
     }

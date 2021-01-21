@@ -2,6 +2,7 @@ package com.example.newvehicleexpense;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,14 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ExpandListViewAdapter extends BaseExpandableListAdapter {
 
     Context context;
     private List<String> listGroup;
-    private HashMap<String,List<String>> bindList;
+    private HashMap<String, List<String>> bindList;
 
     public ExpandListViewAdapter(Context context, List<String> listGroup, HashMap<String, List<String>> bindList) {
         this.context = context;
@@ -83,10 +86,25 @@ public class ExpandListViewAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_child_layout, null);
         }
+
         TextView textViewChild = convertView
                 .findViewById(R.id.child);
 
-        textViewChild.setText(childText);
+
+
+        Pattern p=Pattern.compile("\\d+");
+        Matcher m=p.matcher(childText);
+
+        int ammount=0;
+        while (m.find())
+        {
+             ammount += Integer.parseInt(m.group());
+        }
+
+        Log.d("add", String.valueOf(ammount));
+
+        textViewChild.setText("You spend "+ammount+" on this day "+"\n\n"+childText);
+
         return convertView;
     }
 

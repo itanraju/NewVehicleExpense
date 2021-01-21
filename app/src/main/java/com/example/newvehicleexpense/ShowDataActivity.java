@@ -9,7 +9,6 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,7 +54,7 @@ public class ShowDataActivity extends AppCompatActivity {
 
         while (res3.moveToNext())
         {
-            total.setText(res3.getString(res3.getColumnIndex("total")));
+            total.setText("Total : "+res3.getString(res3.getColumnIndex("total")));
         }
 
     }
@@ -83,16 +82,16 @@ public class ShowDataActivity extends AppCompatActivity {
         {
             Cursor res2=db.getDatabyDate(listGroup.get(i).toString());
 
+            buffer=new StringBuffer();
+
             while (res2.moveToNext())
             {
-                    buffer=new StringBuffer();
+                      buffer.append("Name : "+res2.getString(1)+"\n");
+                      buffer.append("Note : "+res2.getString(2)+"\n");
+                      buffer.append("Ammount : "+res2.getString(4)+"\n");
+                      buffer.append("Type : "+res2.getString(5)+"\n\n");
 
-                    buffer.append("Name : "+res2.getString(1)+"\n");
-                    buffer.append("Note : "+res2.getString(2)+"\n");
-                    buffer.append("Ammount : "+res2.getString(4)+"\n");
-                    buffer.append("Type : "+res2.getString(5)+"\n\n");
-
-                    DbModel model=new DbModel();
+                      DbModel model=new DbModel();
 
                       model.setItemName(res2.getString(1));
                       model.setNote(res2.getString(2));
@@ -100,10 +99,13 @@ public class ShowDataActivity extends AppCompatActivity {
                       model.setAmmount(res2.getString(4));
                       model.setType(res2.getString(5));
 
+                    
             }
             listChild.add(String.valueOf(buffer));
-        }
 
+        }
+        
+        
 
 
         System.out.println(listChild);
